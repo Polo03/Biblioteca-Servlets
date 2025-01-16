@@ -13,6 +13,12 @@ import java.io.PrintWriter;
 
 @WebServlet(name = "libroServlet", value = "/libroServlet")
 public class LibroServlets extends HttpServlet {
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+    }
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
