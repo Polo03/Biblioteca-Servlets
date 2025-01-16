@@ -6,13 +6,13 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class DAOGenerico<T> {
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("biblioteca");
     EntityManager em = emf.createEntityManager();
     EntityTransaction tx = em.getTransaction();
     Class<T> clase;
-
     String nombreClase;
 
     public DAOGenerico(Class<T> clase) {
@@ -20,7 +20,8 @@ public class DAOGenerico<T> {
         nombreClase = clase.getSimpleName();
     }
 
-    public boolean addLibro(T object){
+    //ADD
+    public boolean add(T object){
         tx.begin();
         em.persist(object);
         tx.commit();
@@ -32,19 +33,33 @@ public class DAOGenerico<T> {
         return em.createQuery("SELECT t FROM "+nombreClase+" t").getResultList();
     }
 
+    //SELECT BY ID
+    public T getById(Object id) {
+        T entity = em.find(clase, id);
+        return entity; // Retorna un Optional, que puede ser vacío si no se encuentra la entidad
+    }
+
     //UPDATE
-    public T updateLibro(T object){
+    public T update(T object){
         tx.begin();
         object = em.merge(object);
         tx.commit();
         return object;
     }
-    //DELETE WHERE libro.isbn
-    public boolean delete(T object){
+
+    //DELETE BY ID
+    public boolean delete(Object entity){
         tx.begin();
-        em.remove(object);
+        em.remove(entity);
         tx.commit();
         return true;
     }
 
+    //DELETE ALL
+    public boolean deleteAll(){
+        tx.begin();
+        em.createQuery("DELETE FROM " + nombreClase + " e").executeUpdate();
+        tx.commit();
+        return true;
+    }
 }
