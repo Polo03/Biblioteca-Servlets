@@ -3,4 +3,18 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
          version="6.0">
+
+    <!-- Mapeo del servlet -->
+    <servlet>
+        <servlet-name>Biblioteca</servlet-name>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Biblioteca</servlet-name>
+        <url-pattern>/inicio</url-pattern>
+    </servlet-mapping>
+    <!-- Lista de páginas de bienvenida -->
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
 </web-app>
