@@ -39,20 +39,33 @@ public class LibroServlets extends HttpServlet {
         try {
             switch (accion) {
                 case "insert":
-                    controlador.addLibro(new Libro(isbn, titulo, autor));
-                    out.println("<p>Libro insertado correctamente.</p>");
+                    if(controlador.getLibroByIsbn(isbn) == null) {
+                        controlador.addLibro(new Libro(isbn, titulo, autor));
+                        out.println("<p>Libro insertado correctamente.</p>");
+                    }else{
+                        out.println("<p>Isbn ya existente.</p>");
+                    }
                     break;
                 case "update":
-                    controlador.updateLibro(new Libro(isbn, titulo, autor));
-                    out.println("<p>Libro actualizado correctamente.</p>");
+                    if(controlador.getLibroByIsbn(isbn) != null) {
+                        controlador.updateLibro(new Libro(isbn, titulo, autor));
+                        out.println("<p>Libro actualizado correctamente.</p>");
+                    }else{
+                        out.println("<p>Isbn no existente.</p>");
+                    }
+
                     break;
                 case "deleteAll":
                     controlador.deleteAllLibros();
                     out.println("<p>Libros eliminado correctamente.</p>");
                     break;
                 case "deleteById":
-                    controlador.deleteLibro(isbn);
-                    out.println("<p>Libro eliminado correctamente.</p>");
+                    if(controlador.getLibroByIsbn(isbn) != null) {
+                        controlador.deleteLibro(isbn);
+                        out.println("<p>Libro eliminado correctamente.</p>");
+                    }else{
+                        out.println("<p>Libro no existente.</p>");
+                    }
                     break;
                 case "selectAll":
                     out.println("<h3>Todos los Libros:</h3>");
@@ -66,11 +79,14 @@ public class LibroServlets extends HttpServlet {
                 case "selectById":
                     out.println("<h3>Libro:</h3>");
 
-                    Libro libro  = controlador.getLibroById(isbn);
-                    out.println("<p> En java " + libro +"</p>");
-
-                    json_response = conversorJson.writeValueAsString(libro);
-                    out.println("<p> En java json " + json_response +"</p>");
+                    Libro libro  = controlador.getLibroByIsbn(isbn);
+                    if(libro != null) {
+                        out.println("<p> En java " + libro +"</p>");
+                        json_response = conversorJson.writeValueAsString(libro);
+                        out.println("<p> En java json " + json_response +"</p>");
+                    }else{
+                        out.println("<p>Libro no existente.</p>");
+                    }
                     break;
                 default:
                     out.println("<p>Acción no válida.</p>");

@@ -49,20 +49,39 @@ public class PrestamoServlets extends HttpServlet {
         try {
             switch (accion) {
                 case "insert":
-                    controladorPrestamos.addPrestamo(new Prestamo(0, controladorUsuario.getUsuarioById(usuarioIdInt),controladorEjemplar.getEjemplarById(ejemplarIdInt), fechaInicioDate, fechaDevolucionDate));
-                    out.println("<p>Prestamo insertado correctamente.</p>");
+                    if(controladorUsuario.getUsuarioById(usuarioIdInt)!=null){
+                        if(controladorEjemplar.getEjemplarById(ejemplarIdInt)!=null){
+                            controladorPrestamos.addPrestamo(new Prestamo(0, controladorUsuario.getUsuarioById(usuarioIdInt),controladorEjemplar.getEjemplarById(ejemplarIdInt), fechaInicioDate, fechaDevolucionDate));
+                            out.println("<p>Prestamo insertado correctamente.</p>");
+                        }else
+                           out.println("<p>Ejemplar no encontrado.</p>");
+                    }else
+                        out.println("<p>Usuario no encontrado.</p>");
                     break;
                 case "update":
-                    controladorPrestamos.updatePrestamo(new Prestamo(idInt, controladorUsuario.getUsuarioById(usuarioIdInt),controladorEjemplar.getEjemplarById(ejemplarIdInt), fechaInicioDate, fechaDevolucionDate));
-                    out.println("<p>Prestamo actualizado correctamente.</p>");
+                    if(controladorPrestamos.getPrestamoById(idInt)!=null){
+                        if(controladorUsuario.getUsuarioById(usuarioIdInt)!=null){
+                            if(controladorEjemplar.getEjemplarById(ejemplarIdInt)!=null){
+                                controladorPrestamos.updatePrestamo(new Prestamo(0, controladorUsuario.getUsuarioById(usuarioIdInt),controladorEjemplar.getEjemplarById(ejemplarIdInt), fechaInicioDate, fechaDevolucionDate));
+                                out.println("<p>Prestamo insertado correctamente.</p>");
+                            }else
+                                out.println("<p>Ejemplar no encontrado.</p>");
+                        }else
+                            out.println("<p>Usuario no encontrado.</p>");
+                    }else
+                        out.println("<p>Prestamo no encontrado.</p>");
+
                     break;
                 case "deleteAll":
                     controladorPrestamos.deleteAllPrestamos();
                     out.println("<p>Prestamos eliminado correctamente.</p>");
                     break;
                 case "deleteById":
-                    controladorPrestamos.deletePrestamo(idInt);
-                    out.println("<p>Prestamo eliminado correctamente.</p>");
+                    if(controladorPrestamos.getPrestamoById(idInt)!=null){
+                        controladorPrestamos.deletePrestamo(idInt);
+                        out.println("<p>Prestamo eliminado correctamente.</p>");
+                    }else
+                        out.println("<p>Prestamo no encontrado.</p>");
                     break;
                 case "selectAll":
                     out.println("<h3>Todos los Prestamos:</h3>");
@@ -77,10 +96,12 @@ public class PrestamoServlets extends HttpServlet {
                     out.println("<h3>Prestamo:</h3>");
 
                     Prestamo prestamo  = controladorPrestamos.getPrestamoById(idInt);
-                    out.println("<p> En java " + prestamo +"</p>");
-
-                    json_response = conversorJson.writeValueAsString(prestamo);
-                    out.println("<p> En java json " + json_response +"</p>");
+                    if(prestamo!=null){
+                        out.println("<p> En java " + prestamo +"</p>");
+                        json_response = conversorJson.writeValueAsString(prestamo);
+                        out.println("<p> En java json " + json_response +"</p>");
+                    }else
+                        out.println("<p>Prestamo no encontrado.</p>");
                     break;
                 default:
                     out.println("<p>Acción no válida.</p>");

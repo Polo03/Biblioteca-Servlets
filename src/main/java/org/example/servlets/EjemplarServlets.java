@@ -42,20 +42,38 @@ public class EjemplarServlets extends HttpServlet {
         try {
             switch (accion) {
                 case "insert":
-                    controladorEjemplar.addEjemplar(new Ejemplar(0, controladorLibro.getLibroById(isbn), estado));
-                    out.println("<p>Ejemplar insertado correctamente.</p>");
+                    if(controladorLibro.getLibroById(isbn)!=null) {
+                        controladorEjemplar.addEjemplar(new Ejemplar(0, controladorLibro.getLibroById(isbn), estado));
+                        out.println("<p>Ejemplar insertado correctamente.</p>");
+                    }else{
+                        out.println("<p>Libro no existente.</p>");
+                    }
                     break;
                 case "update":
-                    controladorEjemplar.updateEjemplar(new Ejemplar(idInt, controladorLibro.getLibroById(isbn), estado));
-                    out.println("<p>Ejemplar actualizado correctamente.</p>");
+                    if(controladorEjemplar.getEjemplarById(idInt)!=null) {
+                        if(controladorLibro.getLibroById(isbn)!=null) {
+                            controladorEjemplar.updateEjemplar(new Ejemplar(idInt, controladorLibro.getLibroById(isbn), estado));
+                            out.println("<p>Ejemplar actualizado correctamente.</p>");
+                        }else{
+                            out.println("<p>Libro no existente.</p>");
+                        }
+                    }else{
+                        out.println("<p>Ejemplar no existente.</p>");
+                    }
+
+
                     break;
                 case "deleteAll":
                     controladorEjemplar.deleteAllEjemplares();
                     out.println("<p>Ejemplares eliminado correctamente.</p>");
                     break;
                 case "deleteById":
-                    controladorEjemplar.deleteEjemplar(idInt);
-                    out.println("<p>Ejemplar eliminado correctamente.</p>");
+                    if(controladorEjemplar.getEjemplarById(idInt)!=null) {
+                        controladorEjemplar.deleteEjemplar(idInt);
+                        out.println("<p>Ejemplar eliminado correctamente.</p>");
+                    }else{
+                        out.println("<p>Ejemplar no existente.</p>");
+                    }
                     break;
                 case "selectAll":
                     out.println("<h3>Todos los Ejemplares:</h3>");
@@ -68,12 +86,14 @@ public class EjemplarServlets extends HttpServlet {
                     break;
                 case "selectById":
                     out.println("<h3>Prestamo:</h3>");
-
                     Ejemplar prestamo  = controladorEjemplar.getEjemplarById(idInt);
-                    out.println("<p> En java " + prestamo +"</p>");
-
-                    json_response = conversorJson.writeValueAsString(prestamo);
-                    out.println("<p> En java json " + json_response +"</p>");
+                    if(prestamo!=null) {
+                        out.println("<p> En java " + prestamo +"</p>");
+                        json_response = conversorJson.writeValueAsString(prestamo);
+                        out.println("<p> En java json " + json_response +"</p>");
+                    }else{
+                        out.println("<p>Prestamo no existente.</p>");
+                    }
                     break;
                 default:
                     out.println("<p>Acción no válida.</p>");

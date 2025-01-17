@@ -52,16 +52,22 @@ public class UsuarioServlets extends HttpServlet {
                     out.println("<p>Usuario insertado correctamente.</p>");
                     break;
                 case "update":
-                    controlador.updateUsuario(new Usuario(idInt, dni, nombre, email, password, tipo, penalizacionDate));
-                    out.println("<p>Usuario actualizado correctamente.</p>");
+                    if(controlador.getUsuarioById(idInt) != null) {
+                        controlador.updateUsuario(new Usuario(idInt, dni, nombre, email, password, tipo, penalizacionDate));
+                        out.println("<p>Usuario actualizado correctamente.</p>");
+                    }else
+                        out.println("<p>Usuario no encontrado.</p>");
                     break;
                 case "deleteAll":
                     controlador.deleteAllUsuarios();
                     out.println("<p>Usuarios eliminado correctamente.</p>");
                     break;
                 case "deleteById":
-                    controlador.deleteUsuario(idInt);
-                    out.println("<p>Usuario eliminado correctamente.</p>");
+                    if(controlador.getUsuarioById(idInt) != null) {
+                        controlador.deleteUsuario(idInt);
+                        out.println("<p>Usuario eliminado correctamente.</p>");
+                    }else
+                        out.println("<p>Usuario no encontrado.</p>");
                     break;
                 case "selectAll":
                     out.println("<h3>Todos los Usuarios:</h3>");
@@ -76,10 +82,13 @@ public class UsuarioServlets extends HttpServlet {
                     out.println("<h3>Usuario:</h3>");
 
                     Usuario usuario  = controlador.getUsuarioById(idInt);
-                    out.println("<p> En java " + usuario +"</p>");
+                    if(usuario != null) {
+                        out.println("<p> En java " + usuario +"</p>");
+                        json_response = conversorJson.writeValueAsString(usuario);
+                        out.println("<p> En java json " + json_response +"</p>");
+                    }else
+                        out.println("<p>Usuario no encontrado.</p>");
 
-                    json_response = conversorJson.writeValueAsString(usuario);
-                    out.println("<p> En java json " + json_response +"</p>");
                     break;
                 default:
                     out.println("<p>Acción no válida.</p>");

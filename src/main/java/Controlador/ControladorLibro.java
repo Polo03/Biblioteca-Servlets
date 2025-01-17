@@ -20,7 +20,7 @@ public class ControladorLibro {
         return daoLibro.getAll();
     }
 
-    public Libro getLibroById(String id) {
+    public Libro getLibroByIsbn(String id) {
         return daoLibro.getById(id);
     }
 
