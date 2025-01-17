@@ -33,6 +33,6 @@ public class ControladorLibro {
     }
 
     public boolean deleteLibro(String isbn) {
-        return daoLibro.delete(getLibroById(isbn));
+        return daoLibro.delete(getLibroByIsbn(isbn));
     }
 }

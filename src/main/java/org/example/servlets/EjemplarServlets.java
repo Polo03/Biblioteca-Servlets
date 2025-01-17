@@ -42,8 +42,8 @@ public class EjemplarServlets extends HttpServlet {
         try {
             switch (accion) {
                 case "insert":
-                    if(controladorLibro.getLibroById(isbn)!=null) {
-                        controladorEjemplar.addEjemplar(new Ejemplar(0, controladorLibro.getLibroById(isbn), estado));
+                    if(controladorLibro.getLibroByIsbn(isbn)!=null) {
+                        controladorEjemplar.addEjemplar(new Ejemplar(0, controladorLibro.getLibroByIsbn(isbn), estado));
                         out.println("<p>Ejemplar insertado correctamente.</p>");
                     }else{
                         out.println("<p>Libro no existente.</p>");
@@ -51,8 +51,8 @@ public class EjemplarServlets extends HttpServlet {
                     break;
                 case "update":
                     if(controladorEjemplar.getEjemplarById(idInt)!=null) {
-                        if(controladorLibro.getLibroById(isbn)!=null) {
-                            controladorEjemplar.updateEjemplar(new Ejemplar(idInt, controladorLibro.getLibroById(isbn), estado));
+                        if(controladorLibro.getLibroByIsbn(isbn)!=null) {
+                            controladorEjemplar.updateEjemplar(new Ejemplar(idInt, controladorLibro.getLibroByIsbn(isbn), estado));
                             out.println("<p>Ejemplar actualizado correctamente.</p>");
                         }else{
                             out.println("<p>Libro no existente.</p>");

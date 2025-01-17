@@ -55,11 +55,7 @@ public class LibroServlets extends HttpServlet {
                     }
 
                     break;
-                case "deleteAll":
-                    controlador.deleteAllLibros();
-                    out.println("<p>Libros eliminado correctamente.</p>");
-                    break;
-                case "deleteById":
+                case "delete":
                     if(controlador.getLibroByIsbn(isbn) != null) {
                         controlador.deleteLibro(isbn);
                         out.println("<p>Libro eliminado correctamente.</p>");

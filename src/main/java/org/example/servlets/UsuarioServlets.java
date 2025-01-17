@@ -58,11 +58,7 @@ public class UsuarioServlets extends HttpServlet {
                     }else
                         out.println("<p>Usuario no encontrado.</p>");
                     break;
-                case "deleteAll":
-                    controlador.deleteAllUsuarios();
-                    out.println("<p>Usuarios eliminado correctamente.</p>");
-                    break;
-                case "deleteById":
+                case "delete":
                     if(controlador.getUsuarioById(idInt) != null) {
                         controlador.deleteUsuario(idInt);
                         out.println("<p>Usuario eliminado correctamente.</p>");
