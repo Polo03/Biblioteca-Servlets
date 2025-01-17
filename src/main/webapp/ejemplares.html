@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Ejemplar</title>
+</head>
+<body>
+<h2>Formulario de Ejemplar</h2>
+<form action="ejemplares" method="get">
+    <label for="id">ID:</label>
+    <input type="number" name="id" id="id"><br><br>
+
+    <label for="isbn">ISBN del Libro:</label>
+    <input type="number" name="isbn" id="isbn"><br><br>
+
+    <label for="estado">Estado:</label>
+    <select name="estado" id="estado" required>
+        <option value="Disponible">Disponible</option>
+        <option value="Prestado">Prestado</option>
+        <option value="Dañado">Dañado</option>
+    </select><br><br>
+
+    <label for="accion">Acción:</label>
+    <select name="accion" id="accion" required>
+        <option value="insert">Insert</option>
+        <option value="update">Update</option>
+        <option value="deleteAll">Delete All</option>
+        <option value="deleteById">Delete By Id</option>
+        <option value="selectAll">Select All</option>
+        <option value="selectById">Select By Id</option>
+    </select><br><br>
+
+    <button type="submit">Enviar</button>
+</form>
+</body>
+</html>

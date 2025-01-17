@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Préstamo</title>
+</head>
+<body>
+<h2>Formulario de Préstamo</h2>
+<form action="prestamos" method="get">
+    <label for="id">ID:</label>
+    <input type="number" name="id" id="id" required><br><br>
+
+    <label for="usuario_id">ID Usuario:</label>
+    <input type="number" name="usuario_id" id="usuario_id" required><br><br>
+
+    <label for="ejemplar_id">ID Ejemplar:</label>
+    <input type="number" name="ejemplar_id" id="ejemplar_id" required><br><br>
+
+    <label for="fechaInicio">Fecha de Inicio:</label>
+    <input type="date" name="fechaInicio" id="fechaInicio" required><br><br>
+
+    <label for="fechaDevolucion">Fecha de Devolución:</label>
+    <input type="date" name="fechaDevolucion" id="fechaDevolucion"><br><br>
+
+    <label for="accion">Acción:</label>
+    <select name="accion" id="accion" required>
+        <option value="insert">Insert</option>
+        <option value="update">Update</option>
+        <option value="deleteAll">Delete All</option>
+        <option value="deleteById">Delete By Id</option>
+        <option value="selectAll">Select All</option>
+        <option value="selectById">Select By Id</option>
+    </select><br><br>
+
+    <button type="submit">Enviar</button>
+</form>
+</body>
+</html>
