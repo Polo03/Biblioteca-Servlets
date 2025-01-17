@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-@WebServlet(name = "libroServlet", value = "/libroServlet")
+@WebServlet(name = "libros", value = "/libros")
 public class LibroServlets extends HttpServlet {
 
     @Override

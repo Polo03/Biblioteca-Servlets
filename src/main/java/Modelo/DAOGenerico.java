@@ -1,15 +1,11 @@
 package Modelo;
 
 import jakarta.persistence.*;
-
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 
 public class DAOGenerico<T> {
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("biblioteca");
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("unidad-biblioteca");
     EntityManager em = emf.createEntityManager();
     EntityTransaction tx = em.getTransaction();
     Class<T> clase;

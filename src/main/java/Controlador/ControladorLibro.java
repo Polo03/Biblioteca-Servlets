@@ -2,7 +2,6 @@ package Controlador;
 
 import Modelo.Libro;
 import Modelo.DAOGenerico;
-
 import java.util.List;
 
 public class ControladorLibro {
