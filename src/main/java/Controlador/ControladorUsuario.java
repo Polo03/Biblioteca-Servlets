@@ -1,15 +1,16 @@
 package Controlador;
 
 import Modelo.DAOGenerico;
+import Modelo.DAOUsuario;
 import Modelo.Usuario;
 
 import java.util.List;
 
 public class ControladorUsuario {
-    private DAOGenerico<Usuario> daoUsuario;
+    private DAOUsuario daoUsuario;
 
     public ControladorUsuario() {
-        daoUsuario = new DAOGenerico(Usuario.class);
+        daoUsuario = new DAOUsuario(Usuario.class);
     }
 
     public boolean addUsuario(Usuario usuario) {
@@ -36,4 +37,5 @@ public class ControladorUsuario {
         return daoUsuario.delete(getUsuarioById(id));
     }
 
+    public boolean tienePenalizacionUsuario(Integer id) {return daoUsuario.tienePenalizacionUsuario(id);}
 }

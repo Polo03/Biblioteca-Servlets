@@ -1,16 +1,17 @@
 package Controlador;
 
 import Modelo.DAOGenerico;
+import Modelo.DAOPrestamo;
 import Modelo.Libro;
 import Modelo.Prestamo;
 
 import java.util.List;
 
 public class ControladorPrestamo {
-    private DAOGenerico<Prestamo> daoPrestamo;
+    private DAOPrestamo daoPrestamo;
 
     public ControladorPrestamo() {
-        daoPrestamo = new DAOGenerico(Prestamo.class);
+        daoPrestamo = new DAOPrestamo(Prestamo.class);
     }
 
     public boolean addPrestamo(Prestamo prestamo) {
@@ -37,4 +38,5 @@ public class ControladorPrestamo {
         return daoPrestamo.delete(getPrestamoById(id));
     }
 
+    public boolean tiene3PrestamosActivos(Integer idUsuario) {return daoPrestamo.tiene3PrestamosActivos(idUsuario);}
 }

@@ -28,13 +28,12 @@ public class PrestamoServlets extends HttpServlet {
         String usuarioId = request.getParameter("usuario_id");
         String ejemplarId = request.getParameter("ejemplar_id");
         String fechaInicio = request.getParameter("fechaInicio");
-        String fechaDevolucion = request.getParameter("fechaDevolucion");
         String accion = request.getParameter("accion");
         Integer idInt = id != null && !id.isEmpty() ? Integer.parseInt(id) : null;
         Integer usuarioIdInt = usuarioId != null && !usuarioId.isEmpty() ? Integer.parseInt(usuarioId) : null;
         Integer ejemplarIdInt = ejemplarId != null && !ejemplarId.isEmpty() ? Integer.parseInt(ejemplarId) : null;
         LocalDate fechaInicioDate = fechaInicio != null && !fechaInicio.isEmpty() ? LocalDate.parse(fechaInicio) : null;
-        LocalDate fechaDevolucionDate = fechaDevolucion != null && !fechaDevolucion.isEmpty() ? LocalDate.parse(fechaDevolucion) : null;
+        LocalDate fechaDevolucionDate =fechaInicioDate.plusDays(15);
 
 
         response.setContentType("text/html");
@@ -51,6 +50,9 @@ public class PrestamoServlets extends HttpServlet {
                 case "insert":
                     if(controladorUsuario.getUsuarioById(usuarioIdInt)!=null){
                         if(controladorEjemplar.getEjemplarById(ejemplarIdInt)!=null){
+                            if(controladorUsuario.getUsuarioById(usuarioIdInt)!=null){
+
+                            }
                             controladorPrestamos.addPrestamo(new Prestamo(0, controladorUsuario.getUsuarioById(usuarioIdInt),controladorEjemplar.getEjemplarById(ejemplarIdInt), fechaInicioDate, fechaDevolucionDate));
                             out.println("<p>Prestamo insertado correctamente.</p>");
                         }else
