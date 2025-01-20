@@ -39,4 +39,6 @@ public class ControladorPrestamo {
     }
 
     public boolean tiene3PrestamosActivos(Integer idUsuario) {return daoPrestamo.tiene3PrestamosActivos(idUsuario);}
+
+    public boolean ejemplarDisponible(Integer idEjemplar){return daoPrestamo.ejemplarDiponible(idEjemplar);}
 }

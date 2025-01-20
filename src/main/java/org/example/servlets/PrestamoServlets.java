@@ -50,11 +50,11 @@ public class PrestamoServlets extends HttpServlet {
                 case "insert":
                     if(controladorUsuario.getUsuarioById(usuarioIdInt)!=null){
                         if(controladorEjemplar.getEjemplarById(ejemplarIdInt)!=null){
-                            if(controladorUsuario.getUsuarioById(usuarioIdInt)!=null){
-
-                            }
-                            controladorPrestamos.addPrestamo(new Prestamo(0, controladorUsuario.getUsuarioById(usuarioIdInt),controladorEjemplar.getEjemplarById(ejemplarIdInt), fechaInicioDate, fechaDevolucionDate));
-                            out.println("<p>Prestamo insertado correctamente.</p>");
+                            if(!controladorUsuario.tienePenalizacionUsuario(usuarioIdInt)){
+                                controladorPrestamos.addPrestamo(new Prestamo(0, controladorUsuario.getUsuarioById(usuarioIdInt),controladorEjemplar.getEjemplarById(ejemplarIdInt), fechaInicioDate, fechaDevolucionDate));
+                                out.println("<p>Prestamo insertado correctamente.</p>");
+                            }else
+                                out.println("<p>Este usuario ya tiene 3 prestamos activos.</p>");
                         }else
                            out.println("<p>Ejemplar no encontrado.</p>");
                     }else
