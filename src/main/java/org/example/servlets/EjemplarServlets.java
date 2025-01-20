@@ -30,7 +30,7 @@ public class EjemplarServlets extends HttpServlet {
         String estado = request.getParameter("estado");
         String accion = request.getParameter("accion");
         Integer idInt = id != null && !id.isEmpty() ? Integer.parseInt(id) : null;
-        Integer isbnInt = isbn != null && !isbn.isEmpty() ? Integer.parseInt(isbn) : null;
+//        Integer isbnInt = isbn != null && !isbn.isEmpty() ? Integer.parseInt(isbn) : null;
 
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
@@ -63,11 +63,7 @@ public class EjemplarServlets extends HttpServlet {
 
 
                     break;
-                case "deleteAll":
-                    controladorEjemplar.deleteAllEjemplares();
-                    out.println("<p>Ejemplares eliminado correctamente.</p>");
-                    break;
-                case "deleteById":
+                case "delete":
                     if(controladorEjemplar.getEjemplarById(idInt)!=null) {
                         controladorEjemplar.deleteEjemplar(idInt);
                         out.println("<p>Ejemplar eliminado correctamente.</p>");

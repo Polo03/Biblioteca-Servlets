@@ -62,8 +62,8 @@ public class PrestamoServlets extends HttpServlet {
                     if(controladorPrestamos.getPrestamoById(idInt)!=null){
                         if(controladorUsuario.getUsuarioById(usuarioIdInt)!=null){
                             if(controladorEjemplar.getEjemplarById(ejemplarIdInt)!=null){
-                                controladorPrestamos.updatePrestamo(new Prestamo(0, controladorUsuario.getUsuarioById(usuarioIdInt),controladorEjemplar.getEjemplarById(ejemplarIdInt), fechaInicioDate, fechaDevolucionDate));
-                                out.println("<p>Prestamo insertado correctamente.</p>");
+                                controladorPrestamos.updatePrestamo(new Prestamo(idInt, controladorUsuario.getUsuarioById(usuarioIdInt),controladorEjemplar.getEjemplarById(ejemplarIdInt), fechaInicioDate, fechaDevolucionDate));
+                                out.println("<p>Prestamo actualizado correctamente.</p>");
                             }else
                                 out.println("<p>Ejemplar no encontrado.</p>");
                         }else
@@ -72,11 +72,7 @@ public class PrestamoServlets extends HttpServlet {
                         out.println("<p>Prestamo no encontrado.</p>");
 
                     break;
-                case "deleteAll":
-                    controladorPrestamos.deleteAllPrestamos();
-                    out.println("<p>Prestamos eliminado correctamente.</p>");
-                    break;
-                case "deleteById":
+                case "delete":
                     if(controladorPrestamos.getPrestamoById(idInt)!=null){
                         controladorPrestamos.deletePrestamo(idInt);
                         out.println("<p>Prestamo eliminado correctamente.</p>");
