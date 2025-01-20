@@ -1,15 +1,16 @@
 package Controlador;
 
+import Modelo.DAOEjemplar;
 import Modelo.DAOGenerico;
 import Modelo.Ejemplar;
 
 import java.util.List;
 
 public class ControladorEjemplar {
-    private DAOGenerico<Ejemplar> daoEjemplar;
+    private DAOEjemplar daoEjemplar;
 
     public ControladorEjemplar() {
-        daoEjemplar = new DAOGenerico(Ejemplar.class);
+        daoEjemplar = new DAOEjemplar(Ejemplar.class);
     }
 
     public boolean addEjemplar(Ejemplar ejemplar) {
@@ -36,4 +37,5 @@ public class ControladorEjemplar {
         return daoEjemplar.delete(getEjemplarById(id));
     }
 
+    public long controlarStock(){return daoEjemplar.controlarStock();}
 }

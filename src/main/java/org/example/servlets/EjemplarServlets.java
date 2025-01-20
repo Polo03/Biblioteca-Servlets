@@ -91,6 +91,9 @@ public class EjemplarServlets extends HttpServlet {
                         out.println("<p>Prestamo no existente.</p>");
                     }
                     break;
+                case "stock":
+                    out.println("<p>Stock: "+controladorEjemplar.controlarStock()+"</p>");
+                    break;
                 default:
                     out.println("<p>Acción no válida.</p>");
             }
